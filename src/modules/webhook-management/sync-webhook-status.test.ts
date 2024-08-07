@@ -4,8 +4,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { FeatureFlagService } from "../feature-flag-service/feature-flag-service";
 import { SendgridConfigurationService } from "../sendgrid/configuration/sendgrid-configuration.service";
 import { SendgridPrivateMetadataManager } from "../sendgrid/configuration/sendgrid-metadata-manager";
-import { SmtpConfigurationService } from "../smtp/configuration/smtp-configuration.service";
-import { SmtpPrivateMetadataManager } from "../smtp/configuration/smtp-metadata-manager";
 import * as statusesExports from "./get-webhook-statuses-from-configurations";
 import { syncWebhookStatus } from "./sync-webhook-status";
 import { WebhookManagementService } from "./webhook-management-service";
@@ -29,19 +27,6 @@ describe("syncWebhookStatus", function () {
   const deleteWebhookMock = vi
     .spyOn(webhookManagementService, "deleteWebhook")
     .mockImplementation((_) => Promise.resolve());
-
-  const smtpConfigurator = new SmtpPrivateMetadataManager(
-    null as unknown as SettingsManager,
-    mockSaleorApiUrl,
-  );
-
-  const smtpConfigurationService = new SmtpConfigurationService({
-    metadataManager: smtpConfigurator,
-    initialData: {
-      configurations: [],
-    },
-    featureFlagService: createMockedFeatureFlagService(),
-  });
 
   const sendgridConfigurator = new SendgridPrivateMetadataManager(
     null as unknown as SettingsManager,
@@ -88,7 +73,6 @@ describe("syncWebhookStatus", function () {
       });
 
     await syncWebhookStatus({
-      smtpConfigurationService,
       sendgridConfigurationService,
       webhookManagementService,
     });
@@ -126,7 +110,6 @@ describe("syncWebhookStatus", function () {
       });
 
     await syncWebhookStatus({
-      smtpConfigurationService,
       sendgridConfigurationService,
       webhookManagementService,
     });
@@ -164,7 +147,6 @@ describe("syncWebhookStatus", function () {
       });
 
     await syncWebhookStatus({
-      smtpConfigurationService,
       sendgridConfigurationService,
       webhookManagementService,
     });

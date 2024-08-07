@@ -4,7 +4,6 @@ import * as dotenv from "dotenv";
 import { fetchCloudAplEnvs, getMetadataManagerForEnv, verifyRequiredEnvs } from "./migration-utils";
 
 import { SendgridPrivateMetadataManager } from "../../src/modules/sendgrid/configuration/sendgrid-metadata-manager";
-import { SmtpPrivateMetadataManager } from "../../src/modules/smtp/configuration/smtp-metadata-manager";
 
 dotenv.config();
 
@@ -45,16 +44,6 @@ const runMigration = async () => {
       console.log("Migrated sendgrid configuration found, overriding");
       isSendgridMigrated = true;
       await sendgridMetadataManager.setConfig(sendgridUpdatedSchema);
-    }
-
-    const smtpMetadataManager = new SmtpPrivateMetadataManager(metadataManager, env.saleorApiUrl);
-
-    const smtpUpdatedSchema = await smtpMetadataManager.getConfig();
-
-    if (smtpUpdatedSchema) {
-      console.log("Migrated smtp configuration found, overriding");
-      isSmtpMigrated = true;
-      await smtpMetadataManager.setConfig(smtpUpdatedSchema);
     }
 
     if (isSendgridMigrated) {

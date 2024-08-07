@@ -1,4 +1,3 @@
-import { SmtpConfigurationService } from "../smtp/configuration/smtp-configuration.service";
 import { SendgridConfigurationService } from "../sendgrid/configuration/sendgrid-configuration.service";
 import { WebhookManagementService, AppWebhook } from "./webhook-management-service";
 import { getWebhookStatusesFromConfigurations } from "./get-webhook-statuses-from-configurations";
@@ -7,7 +6,6 @@ import { createLogger } from "../../logger";
 const logger = createLogger("SyncWebhooksStatus");
 
 interface SyncWebhooksStatusArgs {
-  smtpConfigurationService: SmtpConfigurationService;
   sendgridConfigurationService: SendgridConfigurationService;
   webhookManagementService: WebhookManagementService;
 }
@@ -16,7 +14,6 @@ interface SyncWebhooksStatusArgs {
  *  Checks active events in configurations and updates webhooks in the API if needed.
  */
 export const syncWebhookStatus = async ({
-  smtpConfigurationService,
   sendgridConfigurationService,
   webhookManagementService,
 }: SyncWebhooksStatusArgs) => {
@@ -26,13 +23,9 @@ export const syncWebhookStatus = async ({
   logger.debug("Generate expected webhook status based on current configurations");
 
   // API requests can be triggered if not cached yet
-  const [activeSmtpConfigurations, activeSendgridConfigurations] = await Promise.all([
-    smtpConfigurationService.getConfigurations(),
-    sendgridConfigurationService.getConfigurations(),
-  ]);
+  const  activeSendgridConfigurations = await sendgridConfigurationService.getConfigurations()
 
   const newStatuses = getWebhookStatusesFromConfigurations({
-    smtpConfigurations: activeSmtpConfigurations,
     sendgridConfigurations: activeSendgridConfigurations,
   });
 

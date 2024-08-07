@@ -4,11 +4,9 @@ import { SectionWithDescription } from "../../components/section-with-descriptio
 import { ProviderSelectionBox } from "../../modules/app-configuration/ui/provider-selection-box";
 import { useRouter } from "next/router";
 import { sendgridUrls } from "../../modules/sendgrid/urls";
-import { smtpUrls } from "../../modules/smtp/urls";
 import { appUrls } from "../../modules/app-configuration/urls";
 import { BasicLayout } from "../../components/basic-layout";
 import { SendgridLogo } from "../../modules/sendgrid/ui/sendgrid-logo";
-import { SmtpLogo } from "../../modules/smtp/ui/smtp-logo";
 
 const ChooseProviderPage: NextPage = () => {
   const { push } = useRouter();
@@ -32,13 +30,6 @@ const ChooseProviderPage: NextPage = () => {
             providerLogo={<SendgridLogo height={20} width={20} />}
             providerDescription="Use dynamic templates created in SendGrid dashboard to send messages. Event data will be forwarded to SendGrid."
             onClick={() => push(sendgridUrls.newConfiguration())}
-          />
-
-          <ProviderSelectionBox
-            providerName="SMTP"
-            providerLogo={<SmtpLogo height={20} width={20} />}
-            providerDescription="Provide your own SMTP credentials and map Saleor event to custom MJML templates."
-            onClick={() => push(smtpUrls.newConfiguration())}
           />
         </Box>
       </SectionWithDescription>

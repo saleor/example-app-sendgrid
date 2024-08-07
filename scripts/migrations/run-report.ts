@@ -5,8 +5,6 @@ import { fetchCloudAplEnvs, getMetadataManagerForEnv, verifyRequiredEnvs } from 
 
 import { AppConfigPrivateMetadataManager } from "../../src/modules/app-configuration/app-config-metadata-manager";
 import { SendgridPrivateMetadataManagerV1 } from "../../src/modules/sendgrid/configuration/sendgrid-metadata-manager-v1";
-import { MjmlPrivateMetadataManager } from "../../src/modules/smtp/configuration/mjml-metadata-manager";
-import { smtpTransformV1toV2 } from "../../src/modules/smtp/configuration/migrations/smtp-transform-v1-to-v2";
 import { sendgridTransformV1toV2 } from "../../src/modules/sendgrid/configuration/migrations/sendgrid-transform-v1-to-v2";
 
 dotenv.config();
@@ -59,22 +57,6 @@ const runReport = async () => {
       });
 
       console.log("Old config", sendgridConfigurationV1);
-      console.log("New config", v2);
-    }
-
-    const mjmlMetadataManagerV1 = new MjmlPrivateMetadataManager(metadataManager, env.saleorApiUrl);
-
-    const mjmlConfiguration = await mjmlMetadataManagerV1.getConfig();
-
-    if (mjmlConfiguration) {
-      console.log("Found old mjml config, migrating");
-      isSmtpMigrated = true;
-      const v2 = smtpTransformV1toV2({
-        configV1: mjmlConfiguration,
-        appConfigV1: appConfiguration,
-      });
-
-      console.log("Old config", mjmlConfiguration);
       console.log("New config", v2);
     }
 

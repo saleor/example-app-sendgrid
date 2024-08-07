@@ -10,7 +10,7 @@ export default createManifestHandler({
 
       const manifest: AppManifest = {
         about:
-          "Emails & Messages App is a multi-vendor Saleor app that integrates with notification services.",
+          "App integrate with Sendgrid",
         appUrl: iframeBaseUrl,
         author: "Saleor Commerce",
         brand: {
@@ -26,8 +26,8 @@ export default createManifestHandler({
            */
         ],
         homepageUrl: "https://github.com/saleor/apps",
-        id: "saleor.app.emails-and-messages",
-        name: "Emails & Messages",
+        id: "saleor.app.sendgrid",
+        name: "Sendgrid",
         permissions: ["MANAGE_ORDERS", "MANAGE_USERS", "MANAGE_GIFT_CARD"],
         /**
          * Requires 3.10 due to invoices event payload - in previous versions, order reference was missing

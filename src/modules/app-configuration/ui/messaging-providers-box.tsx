@@ -4,12 +4,10 @@ import { BoxWithBorder } from "../../../components/box-with-border";
 import { BoxFooter } from "../../../components/box-footer";
 import { defaultPadding } from "../../../components/ui-defaults";
 import { useRouter } from "next/router";
-import { smtpUrls } from "../../smtp/urls";
 import { sendgridUrls } from "../../sendgrid/urls";
 import { appUrls } from "../urls";
 import React from "react";
 import { SendgridLogo } from "../../sendgrid/ui/sendgrid-logo";
-import { SmtpLogo } from "../../smtp/ui/smtp-logo";
 
 const NoExistingConfigurations = () => {
   const { push } = useRouter();
@@ -25,11 +23,10 @@ const NoExistingConfigurations = () => {
   );
 };
 
-type ProviderType = "sendgrid" | "smtp";
+type ProviderType = "sendgrid";
 
 const providerLabels: Record<ProviderType, string> = {
   sendgrid: "SendGrid",
-  smtp: "SMTP",
 };
 
 export type ConfigurationListItem = {
@@ -68,8 +65,6 @@ export const MessagingProvidersBox = ({
 
   const getEditLink = (configuration: ConfigurationListItem) => {
     switch (configuration.provider) {
-      case "smtp":
-        return smtpUrls.configuration(configuration.id);
       case "sendgrid":
         return sendgridUrls.configuration(configuration.id);
     }
@@ -77,8 +72,6 @@ export const MessagingProvidersBox = ({
 
   const getProviderLogo = (configuration: ConfigurationListItem) => {
     switch (configuration.provider) {
-      case "smtp":
-        return <SmtpLogo height={20} width={20} />;
       case "sendgrid":
         return <SendgridLogo height={20} width={20} />;
     }

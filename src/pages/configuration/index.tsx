@@ -15,9 +15,6 @@ const ConfigurationPage: NextPage = () => {
   const { data: dataSendgrid, isLoading: isLoadingSendgrid } =
     trpcClient.sendgridConfiguration.getConfigurations.useQuery();
 
-  const { data: dataSmtp, isLoading: isLoadingSmtp } =
-    trpcClient.smtpConfiguration.getConfigurations.useQuery();
-
   const data: ConfigurationListItem[] = [
     ...(dataSendgrid?.map((configuration) => ({
       name: configuration.name,
@@ -25,15 +22,9 @@ const ConfigurationPage: NextPage = () => {
       id: configuration.id,
       active: configuration.active,
     })) || []),
-    ...(dataSmtp?.map((configuration) => ({
-      name: configuration.name,
-      provider: "smtp" as const,
-      id: configuration.id,
-      active: configuration.active,
-    })) || []),
   ];
 
-  const isLoading = isLoadingSendgrid || isLoadingSmtp;
+  const isLoading = isLoadingSendgrid;
 
   if (!appBridgeState) {
     return null;
