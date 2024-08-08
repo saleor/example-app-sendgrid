@@ -39,13 +39,12 @@ const ConfigurationPage: NextPage = () => {
       <Box display="grid" gridTemplateColumns={{ desktop: 3, mobile: 1 }}>
         <Box>
           <Text>
-            Configure Emails & Messages app to deliver Saleor Event webhooks to configured messaging
-            providers.
+            Configure Sendgrid app to deliver Saleor Event webhooks to Sendgrid.
           </Text>
         </Box>
       </Box>
       <SectionWithDescription
-        title="Messaging providers"
+        title="Configurations"
         description={
           <Text>Manage provider configurations and modify it&apos;s message templates.</Text>
         }

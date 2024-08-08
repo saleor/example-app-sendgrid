@@ -42,7 +42,6 @@ const NewSendgridConfigurationPage: NextPage = () => {
     <BasicLayout
       breadcrumbs={[
         { name: "Configuration", href: appUrls.configuration() },
-        { name: "Add provider" },
         { name: "SendGrid" },
       ]}
     >

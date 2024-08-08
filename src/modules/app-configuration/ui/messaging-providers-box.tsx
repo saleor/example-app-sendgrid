@@ -12,13 +12,13 @@ import { SendgridLogo } from "../../sendgrid/ui/sendgrid-logo";
 const NoExistingConfigurations = () => {
   const { push } = useRouter();
 
-  const redirectToProvidersSelection = () => {
-    push(appUrls.chooseProvider());
+  const redirectToNewConfiguration = () => {
+    push(sendgridUrls.newConfiguration());
   };
 
   return (
     <BoxWithBorder padding={10} display="grid" alignItems="center" justifyContent="center">
-      <Button onClick={redirectToProvidersSelection}>Add first provider</Button>
+      <Button onClick={redirectToNewConfiguration}>Add first configuration</Button>
     </BoxWithBorder>
   );
 };
@@ -59,22 +59,8 @@ export const MessagingProvidersBox = ({
     return <NoExistingConfigurations />;
   }
 
-  const redirectToProvidersSelection = () => {
-    push(appUrls.chooseProvider());
-  };
-
-  const getEditLink = (configuration: ConfigurationListItem) => {
-    switch (configuration.provider) {
-      case "sendgrid":
-        return sendgridUrls.configuration(configuration.id);
-    }
-  };
-
-  const getProviderLogo = (configuration: ConfigurationListItem) => {
-    switch (configuration.provider) {
-      case "sendgrid":
-        return <SendgridLogo height={20} width={20} />;
-    }
+  const redirectToNewConfiguration = () => {
+    push(sendgridUrls.newConfiguration());
   };
 
   return (
@@ -93,7 +79,7 @@ export const MessagingProvidersBox = ({
         {configurations.map((configuration) => (
           <React.Fragment key={configuration.id}>
             <Box display="flex" gap={defaultPadding}>
-              {getProviderLogo(configuration)}
+              <SendgridLogo height={20} width={20} />
               <Text>{providerLabels[configuration.provider]}</Text>
             </Box>
 
@@ -108,7 +94,7 @@ export const MessagingProvidersBox = ({
                 variant="tertiary"
                 size="small"
                 onClick={() => {
-                  push(getEditLink(configuration));
+                  push(sendgridUrls.configuration(configuration.id));
                 }}
               >
                 Edit
@@ -118,7 +104,7 @@ export const MessagingProvidersBox = ({
         ))}
       </Box>
       <BoxFooter>
-        <Button onClick={redirectToProvidersSelection}>Add provider</Button>
+        <Button onClick={redirectToNewConfiguration}>Add provider</Button>
       </BoxFooter>
     </BoxWithBorder>
   );
