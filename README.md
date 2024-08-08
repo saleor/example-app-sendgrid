@@ -72,14 +72,6 @@ This template host manifest at `/api/manifest`
 
 You can also install application using GQL or command line. Follow the guide [how to install your app](https://docs.saleor.io/docs/3.x/developer/extending/apps/installing-apps#installation-using-graphql-api) to learn more.
 
-5. Start the dev SMTP server
-
-```bash
-docker compose up
-```
-
-All emails will be captured by the MailHog service. To inspect emails, open `http://localhost:8025/` in your browser.
-
 ### Generated schema and typings
 
 Commands `build` and `dev` would generate schema and typed functions using Saleor's GraphQL endpoint. Commit the `generated` folder to your repo as they are necessary for queries and keeping track of the schema changes.
