@@ -10,6 +10,15 @@ Note: This repository is an example, which means:
 
 Sendgrid app is based on App Template - you can check it [here](https://github.com/saleor/saleor-app-template)
 
+### Docs
+
+You can find docs [here](./docs/sendgrid.md)
+
+
+### Troubleshooting
+
+If you have any problem check [troubleshooting doc](./docs/troubleshooting.md)
+
 ## How to use this project
 
 ### Select your APL
