@@ -6,7 +6,7 @@ Sendgrid application is responsible for sending emails to the customers. It is c
 
 :::info
 
-Sendgrid account is require. You can create one [here](https://signup.sendgrid.com/).
+Sendgrid account is required. You can create one [here](https://signup.sendgrid.com/).
 
 :::
 
